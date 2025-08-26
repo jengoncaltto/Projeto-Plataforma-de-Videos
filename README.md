@@ -68,4 +68,5 @@ Projeto desenvolvido por **Jenifer Gonçalves Brito**, como entrega final do cur
 
 ## ☑ UML
 
-<img width="1001" height="795" alt="image" src="https://github.com/user-attachments/assets/6c4e69b2-be0d-4cc8-adac-6e4057d5fa5c" />
+<img width="825" height="779" alt="image" src="https://github.com/user-attachments/assets/deba8ffe-8be6-444e-a66b-56f42f1dedbe" />
+
