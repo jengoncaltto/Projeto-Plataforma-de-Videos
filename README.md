@@ -67,6 +67,6 @@ Este trabalho foi desenvolvido como parte do aprendizado e não tem fins comerci
 Projeto desenvolvido por **Jenifer Gonçalves Brito**, como entrega final do curso **Java POO - Curso em Vídeo**.
 
 ## ☑ UML
+<img width="2424" height="2246" alt="Classe UML" src="https://github.com/user-attachments/assets/b613883d-15bf-4ad1-b503-11ba3e0ddcca" />
 
-<img width="825" height="779" alt="image" src="https://github.com/user-attachments/assets/deba8ffe-8be6-444e-a66b-56f42f1dedbe" />
 
