@@ -6,6 +6,7 @@ public class Usuario extends Pessoa{
 	public Usuario(String nome, int idade, String genero, String login) {
 		super(nome, idade, genero);
 		this.totalAssistido = 0;
+		this.login = login;
 	}
 
 	public String getLogin() {
@@ -25,6 +26,4 @@ public class Usuario extends Pessoa{
 	public String toString() {
 		return "Usuario [" + super.toString() +"\nlogin=" + login + ", totalAssistido=" + totalAssistido + "]";
 	}
-	
-	
 }
