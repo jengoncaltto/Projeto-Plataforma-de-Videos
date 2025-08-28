@@ -166,7 +166,9 @@ public class Menu {
 		System.out.println("\n============= MENU DA SUA CONTA =============");
 		System.out.println("1. Mostrar informações da sua conta.");
 		System.out.println("2. Ver a quantidade total de videos assistidos.");
-		System.out.println("3. Retornar ao menu principal");
+		System.out.println("3. Alterar nome de usuário.");
+		System.out.println("4. Alterar gênero do usuário.");
+		System.out.println("5. Retornar ao menu principal");
 		System.out.println("0. SAIR DO MENU!");
 		System.out.println("Insira sua opção: ");
 		opcaoSelecionada = scan.nextInt();
@@ -178,6 +180,12 @@ public class Menu {
 				quantidadeTotalVideosAssistidos();
 				break;
 			case 3: 
+				alterarNomeUsuario();
+				break;
+			case 4:
+				alterarGeneroUsuario();
+				break;
+			case 5:
 				return;
 			case 0:
 				break;
@@ -194,5 +202,20 @@ public class Menu {
 	
 	private void quantidadeTotalVideosAssistidos() {
 		System.out.println("\nVideos Assistidos: " + conta.getTotalAssistido() + "\n");
+	}
+	
+	private void alterarNomeUsuario() {
+		scan.nextLine();
+		System.out.println("Seu nome: " + conta.getNome() + "\nAlterar nome para: ");
+		conta.setNome(scan.nextLine());
+		System.out.println("\nNome atualizado para: " + conta.getNome());
+	}
+	
+	private void alterarGeneroUsuario() {
+
+		scan.nextLine();
+		System.out.println("Seu gênero: " + conta.getGenero() + "\nAlterar gênero para: ");
+		conta.setGenero(scan.nextLine());
+		System.out.println("\nGênero atualizado para: " + conta.getGenero());
 	}
 }
