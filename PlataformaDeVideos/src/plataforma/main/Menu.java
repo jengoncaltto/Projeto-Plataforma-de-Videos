@@ -4,27 +4,25 @@ import java.util.List;
 import java.util.Scanner;
 import plataforma.modelo.Usuario;
 import plataforma.modelo.Video;
+import plataforma.modelo.Visualizacao;
 
 public class Menu {
 	Scanner scan = new Scanner(System.in);
 	Usuario conta;
+	Video video;
 	List filmes;
+	int opcaoSelecionada;
 
-	// código que não serão utilizados em herança, melhor estar private e não protected.
-	
-	
 	public Menu(Usuario conta, List filmes) {
 		this.conta = conta;
 		this.filmes = filmes;
-		int opcaoSelecionada;
-		
-		System.out.println("============= MENU =============");
+		do {
+		System.out.println("\n============= MENU =============");
 		System.out.println("1. Selecionar um video.");
 		System.out.println("2. Acessar o menu da conta do usuário.");
 		System.out.println("0. SAIR DO MENU!");
 		System.out.println("Insira sua opção: ");
 		opcaoSelecionada = scan.nextInt();
-		do {
 			switch (opcaoSelecionada) {
 			case 1:
 				apresentandoLista();
@@ -42,30 +40,39 @@ public class Menu {
 		} while (opcaoSelecionada != 0);
 	}
 	
-	private void  apresentandoLista() {
-		System.out.println("Selecione o indice de acordo com o video desejado: ");
+	private void apresentandoLista() {
+		Video videoIesimaPosicao;
+		System.out.println("\nSelecione o indice de acordo com o video desejado: ");
 		for (int i = 0; i < filmes.size(); i++) {
-			System.out.println(i + ". " + filmes.get(i));
+			videoIesimaPosicao = (Video) filmes.get(i);
+			System.out.println(i + ". " + videoIesimaPosicao.getTitulo());
 		}
-		int aux = scan.nextInt();
+		int indiceVideoSelecionado = scan.nextInt();
 
-		//if(aux >=0 && aux < filmes.size()){
-		//	menuVideo(filmes.get(aux));
-		//}else{
-		//	System.out.println("Indice inválido. 
-		//	Digite um número entre 0 e " + (filmes.sizes()-1));
-		//}
+		if(indiceVideoSelecionado >=0 && indiceVideoSelecionado < filmes.size()){
+			video =(Video) filmes.get(indiceVideoSelecionado);
+			menuVideo();
+		}else{
+		    System.out.println("Indice inválido. Digite um número entre 0 e " + (filmes.size() -1));
+		}
 	}
 	
-	protected void menuVideo(Video video) {
-		int opcaoSelecionada;
-		System.out.println("============= MENU DO VIDEO =============");
+	private void menuVideo() {
+		do {
+		System.out.println("\n============= MENU DO VIDEO =============");
 		System.out.println("1. Acessar a descrição do video");
 		System.out.println("2. Ver a quantidade de curtidas no video");
+		System.out.println("3. Dar play no video.");
+		System.out.println("4. Dar pause no video.");
+		System.out.println("5. Curtir o video.");
+		System.out.println("6. Comentar no video.");
+		System.out.println("7. Compartilhar video.");
+		System.out.println("8. Avaliar video.");
+		System.out.println("9. Ver lista de comentários.");
+		System.out.println("10. RETORNAR AO MENU PRINCIPAL.");
 		System.out.println("0. SAIR DO MENU!");
 		System.out.println("Insira sua opção: ");
 		opcaoSelecionada = scan.nextInt();
-		do {
 			switch (opcaoSelecionada) {
 			case 1:
 				acessarDescricaoVideo();
@@ -73,6 +80,29 @@ public class Menu {
 			case 2:
 				verQuantidadeCurtidas();
 				break;
+			case 3: 
+				playNoVideo();
+				break;
+			case 4:
+				pauseNoVideo();
+				break;
+			case 5:
+				curtindoVideo();
+				break;
+			case 6:
+				comentandoVideo();
+				break;
+			case 7:
+				compartilhandoVideo();
+				break;
+			case 8:
+				avaliandoVideo();
+				break;
+			case 9:
+				verListaComentarios();
+				break;
+			case 10:
+				return;
 			case 0:
 				break;
 			default: 
@@ -83,22 +113,63 @@ public class Menu {
 		} while (opcaoSelecionada != 0);
 	}
 	
-	protected void acessarDescricaoVideo() {
-		System.out.println(filmes.get(0));
+	private void acessarDescricaoVideo() {
+		System.out.println("\n" + video.toString() + "\n");
 	}
-	protected void verQuantidadeCurtidas() {
-		System.out.println();
+	private void verQuantidadeCurtidas() {
+		System.out.println("\nQuantidade de curtidas: " + video.getCurtidas() + "\n");
+	}
+	private void playNoVideo() {
+		video.play();
+		System.out.println("Assistindo video.\n");
+	}
+	private void pauseNoVideo() {
+		video.pause();
+		System.out.println("Video pausado.\n");
+	}
+	private void curtindoVideo() {
+		video.like();
+		System.out.println("Video foi curtido.\n");
+	}
+	private void comentandoVideo() {
+		String comentario;
+		scan.nextLine();
+		System.out.println("Comentário: ");
+		comentario = scan.nextLine();
+		video.comentar(conta.getLogin() + ": " + comentario);
+		System.out.println("Comentário enviado!\n");
+	}
+	private void compartilhandoVideo() {
+		video.compartilhar();
+		System.out.println("Video compartilhado\n");
+	}
+	private void avaliandoVideo() {
+		Visualizacao view = new Visualizacao(conta, video);
+		float nota;
+		System.out.println("Selecione sua nota de 0 a 10: ");
+		nota = scan.nextFloat();
+		if(nota < 0 && nota > 10) {
+			System.out.println("Número Inválido. Selecione outro número.");
+		}else {
+			view.avaliar(nota);
+		}
+	}
+	private void verListaComentarios() {
+		System.out.println("\nComentários:\r");
+		for (int i = 0; i < video.getQuantidadeComentarios(); i++) {
+			System.out.println((i+1)  + ". " + video.getListaComentarios().get(i));
+		}
 	}
 	
-	protected void menuConta() {
-		int opcaoSelecionada;
-		System.out.println("============= MENU DA SUA CONTA =============");
-		System.out.println("1. Alterar nome");
-		System.out.println("2. ");
+	private void menuConta() {
+		do {
+		System.out.println("\n============= MENU DA SUA CONTA =============");
+		System.out.println("1. Mostrar informações da sua conta.");
+		System.out.println("2. Ver a quantidade total de videos assistidos.");
+		System.out.println("3. Retornar ao menu principal");
 		System.out.println("0. SAIR DO MENU!");
 		System.out.println("Insira sua opção: ");
 		opcaoSelecionada = scan.nextInt();
-		do {
 			switch (opcaoSelecionada) {
 			case 1:
 				mostrarInformacoesConta();
@@ -106,6 +177,8 @@ public class Menu {
 			case 2:
 				quantidadeTotalVideosAssistidos();
 				break;
+			case 3: 
+				return;
 			case 0:
 				break;
 			default: 
@@ -115,11 +188,11 @@ public class Menu {
 		} while (opcaoSelecionada != 0);
 	}
 	
-	protected void mostrarInformacoesConta() {
-		System.out.println(conta.toString());
+	private void mostrarInformacoesConta() {
+		System.out.println("\n" + conta.toString() + "\n");
 	}
 	
-	protected void quantidadeTotalVideosAssistidos() {
-		System.out.println(conta.getTotalAssistido());
+	private void quantidadeTotalVideosAssistidos() {
+		System.out.println("\nVideos Assistidos: " + conta.getTotalAssistido() + "\n");
 	}
 }
