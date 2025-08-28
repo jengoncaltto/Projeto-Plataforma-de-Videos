@@ -5,5 +5,5 @@ public interface AcoesVideo {
 	public void pause();
 	public void like();
 	public void compartilhar(); //add
-	public void comentar(); //add
+	public void comentar(String comentario); //add
 }
