@@ -14,7 +14,7 @@ public class Main {
 		Video f2 = new Video("Python", "Curso em Video", 40);
 		listaVideos.add(f1);
 		listaVideos.add(f2);
-		Menu menu = new Menu(c1, listaVideos);
+		Menu menuC1 = new Menu(c1, listaVideos);
 		System.out.println("Aplicação encerrada");
 	}
 }
